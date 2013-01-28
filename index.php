@@ -4,8 +4,13 @@
  *	Licensed by GPLv3, powered by cynicism
  */
  	
- 	include("includes/templates/header.php");
- 	include("includes/templates/nav.php");
+ 	if(!file_exists("config.php")) {
+	 	
+ 	}
+ 	
+ 	include("includes/template.php");
+ 	printHeader();
+ 	printNav();
  	echo("<div class=\"container\" style=\"padding-top:40px;\">Something cool will eventually be here.</div>\n");
- 	include("includes/templates/footer.php");
+ 	printFooter();
 ?>
