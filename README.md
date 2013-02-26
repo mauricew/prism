@@ -1,8 +1,23 @@
-Prism, A Pretty Robust Internet [Radio] Station Management Tool
+Prism 
 ==========
+#####A Pretty Robust Internet [Radio] Station Management Tool
 
 Prism is the culmination of the need for a separate radio station management panel without having to resort to complicated interfaces and features with software like Airtime. The plan is to have schedule management, realtime logging, and a hope for configuring the output server and audio streamer without having to touch configuration files.
-At the time of this writing the app is **not** operational.
+At the time of this writing this application is at version **0.1**, which can:
+---------
+* Create/Retrieve/Update/Delete shows and streams
+* Show an informational dashboard on the homepage
+
+Requirements
+---------
+* LAMP stack with PHP 5.3 or higher
+* One or more Icecast2 servers, local or remote
+* (TBA) Liquidsoap
+* (Optional) Access to cron and local email
+
+Installation
+---------
+If no install currently exists, you will be pointed to run install.php.
 
 Why?
 ---------
@@ -12,9 +27,4 @@ But come 2013, the director of the umbrella organization with covered this and t
 
 So go forth into the world, my little prism, and preach the wonders of **free** and **simple** internet radio automation.
 
-Requirements
----------
-* LAMP stack (I wouldn't recommend using Windows)
-* One or more Icecast2 servers, local or remote
-* Liquidsoap (this is why you shouldn't use Windows)
-* (Optional) Access to cron and local email
+

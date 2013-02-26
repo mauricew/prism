@@ -1,0 +1,23 @@
+/*
+ * Pretty Robust Internet Station Management
+ * Da stylez
+ * Created by Maurice Wahba, (c)2013
+ */
+
+[class^="icon-"] {
+	/*background-image: url('bootstrap/glyphicons-halflings.png');*/
+}
+
+body {
+	padding-top: 50px;
+}
+
+#show-timeslots .timeslot .btn-group {
+	top: -5px;
+}
+
+@media screen and (max-width: 979px) {
+	body {
+		padding-top: 0px;
+	}
+}
