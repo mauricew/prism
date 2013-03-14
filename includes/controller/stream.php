@@ -11,9 +11,16 @@
 							$db->escape($_POST['password']),
 							$db->escape($_POST['mountpoint'])
 						);
-						$stream->add($db);
-						printAlert("success", "<strong>Stream added successfully</strong><p>Please wait while you're redirected back to the main streams page.</p>");
-						header("Refresh: 3;url=./?p=streams");
+						$stream->checkStatus();
+						if(!$stream->online) {
+							printAlert("error", "<strong>Stream offline</strong><p>To verify its presence, you must start your stream before it can be added.</p>");
+							echo("<a class=\"btn btn-danger\" href=\"javascript:history.back();\">Go Back</a>");
+						}
+						else {
+							$stream->add($db);
+							printAlert("success", "<strong>Stream added successfully</strong><p>Please wait while you're redirected back to the main streams page.</p>");
+							header("Refresh: 3;url=./?p=streams");
+						}
 					}
 					else {
 						echo("<h2>Add new stream</h2>");
