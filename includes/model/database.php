@@ -15,7 +15,7 @@
 			$this->_config = array('host' => $host, 'user' => $username, 'pass' => $password, 'name' => $database);
 			$this->open();
 			if($this->conn->connect_error) {
-				exit(printAlert("error", "<strong>Connection failed</strong>: " . $this->conn->connect_error));
+				exit(printAlert("error", "<strong>Connection failed</strong>. Check if the MySQL service has been started or if the information inside <em>config.php</em> is correct."));
 			}
 		}
 		
