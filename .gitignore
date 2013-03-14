@@ -1,2 +1,3 @@
 #Prism gitignore file.
-purge.php
+config.php	#Self explanatory
+purge.php	#Personal script to delete config.php and database
