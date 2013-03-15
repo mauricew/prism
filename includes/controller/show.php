@@ -106,23 +106,25 @@
 			</tr>";
 			$result = $db->getTable("shows");
 			while($row = $result->fetch_assoc()) {
-				$show = Show::get($db, $row['id']);
-				$output .= "<tr>
-				<td>{$row['name']}</td>
-				<td>{$row['host']}</td>
-				<td>{$row['description']}</td>";
-				if(count($show->timeslots) > 1)
-					$output .= "<td>Multiple</td>";
-				else
-					$output .= "<td>{$show->timeslots[0]['day']} " . date("g:ia", strtotime($show->timeslots[0]['start_time'])) . " - " . date("g:ia", strtotime($show->timeslots[0]['end_time'])) . "</td>";
-				$output .= "<td><div class=\"btn-group\">
-					<button class=\"btn dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-cog\"></i><span class=\"caret\"></span></button>
-					<ul class=\"dropdown-menu\">
-						<li><a href=\"./?p=schedule&a=upd&id={$row['id']}\">Edit</a></li>
-						<li><a href=\"./?p=schedule&a=del&id={$row['id']}\">Delete</a></li>
-					</ul></div>
-					</td>
-				</tr>";
+				if($row['active'] == 1) {
+					$show = Show::get($db, $row['id']);
+					$output .= "<tr>
+					<td>{$row['name']}</td>
+					<td>{$row['host']}</td>
+					<td>{$row['description']}</td>";
+					if(count($show->timeslots) > 1)
+						$output .= "<td>Multiple</td>";
+					else
+						$output .= "<td>{$show->timeslots[0]['day']} " . date("g:ia", strtotime($show->timeslots[0]['start_time'])) . " - " . date("g:ia", strtotime($show->timeslots[0]['end_time'])) . "</td>";
+					$output .= "<td><div class=\"btn-group\">
+						<button class=\"btn dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-cog\"></i><span class=\"caret\"></span></button>
+						<ul class=\"dropdown-menu\">
+							<li><a href=\"./?p=schedule&a=upd&id={$row['id']}\">Edit</a></li>
+							<li><a href=\"./?p=schedule&a=del&id={$row['id']}\">Delete</a></li>
+						</ul></div>
+						</td>
+					</tr>";
+				}
 			}
 			return $output;
 		}

@@ -38,7 +38,7 @@
 				"time int, listeners smallint)");
 			//$this->query("CREATE TABLE settings()");
 			$this->query("CREATE TABLE shows(id int not null auto_increment primary key, name varchar(255), host varchar(255), " .
-				"description varchar(1024))");
+				"description varchar(1024), active tinyint)");
 			$this->query("CREATE TABLE shows_timeslots(id int not null auto_increment primary key, show_id int, day varchar(16)," .
 				"start_time time, end_time time)");
 			$this->query("CREATE TABLE streams(id int not null auto_increment primary key, nickname varchar(255), hostname varchar(255), " .

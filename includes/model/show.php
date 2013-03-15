@@ -10,17 +10,18 @@
 		public $description;
 		public $hosts;
 		public $timeslots;
-	
+		public $active;
 	
 		public function __construct($name, $hosts, $description, $timeslots) {
 			$this->name = $name;
 			$this->hosts = $hosts;
 			$this->description = $description;
 			$this->timeslots = $timeslots;
+			$this->active = 1;
 		}
 		
 		public function add(Database $db) {
-			$db->query("insert into `shows` (`name`, `host`, `description`) values ('{$this->name}', '{$this->hosts}', '{$this->description}')");
+			$db->query("insert into `shows` (`name`, `host`, `description`, `active`) values ('{$this->name}', '{$this->hosts}', '{$this->description}', '{$this->active}')");
 			foreach($this->timeslots as $ts) {
 				$show_id = $db->conn->insert_id;
 				$db->query("insert into shows_timeslots (show_id, day, start_time, end_time) values ($show_id, '{$ts['day']}', '{$ts['start_time']}', '{$ts['end_time']}')");
