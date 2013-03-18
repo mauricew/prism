@@ -87,8 +87,25 @@
 						header("Location: ./?p=schedule");
 					}
 				}
+				/*
+				else if($act == "csv") {
+					if(isset($_POST['submit'])) {
+						if(isset($_FILES['csv'])) {
+							if($_FILES['csv']['type'] == "text/csv") {
+								print_r($_FILES['csv']);
+							}
+							else {
+								print "Not csv";
+							}
+						}
+						else {
+							// Error handle here
+						}
+					}
+				}
 				else {
 				}
+			*/
 			}
 			else {
 				print index($db);
@@ -97,7 +114,8 @@
 		
 		public static function index_table(Database $db) {
 			$output = "";
-			$output .= "<tr>
+			$output .= "
+			<tr>
 				<th>Name</th>
 				<th>Host(s)</th>
 				<th>Description</th>
@@ -108,7 +126,8 @@
 			while($row = $result->fetch_assoc()) {
 				if($row['active'] == 1) {
 					$show = Show::get($db, $row['id']);
-					$output .= "<tr>
+					$output .= "
+					<tr>
 					<td>{$row['name']}</td>
 					<td>{$row['host']}</td>
 					<td>{$row['description']}</td>";

@@ -67,8 +67,10 @@
 		
 <?php	}
 		function index(Database $db) { ?>
-		<h2><span>Shows</span>
-			<div class="btn-group pull-right">
+		<h2>
+			<span>Shows</span>
+			<div class="btn-toolbar pull-right" style="margin:0;">
+				<!--a class="btn" role="button" href="#schedule-import" data-toggle="modal"><i class="icon-file"></i>Import CSV</a-->
 				<a class="btn btn-inverse" href="./?p=schedule&a=add"><i class="icon-plus-sign icon-white"></i> Add new show</a>
 			</div>
 		</h2>
@@ -76,5 +78,22 @@
 <?php 	print Show_Controller::index_table($db); ?>
 		</table>
 <?php	}	?>
-		
+		<div id="schedule-import" class="modal hide" tabindex="-1" role="dialog">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3>Import schedule data from CSV</h3>
+			</div>
+			<form name="importcsv" method="post" action="<?php print $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'] . "&a=csv"; ?>" enctype="multipart/form-data" style="margin:0;">
+				<div class="modal-body">
+					<p>Shows should be in this format:</p>
+					<p class="well"><strong>Name, Host, Description, Day of week, Start time, End time</strong></p>
+					<p>Only one timeslot supported.</p>
+					<input type="file" name="csv" />
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success" type="submit" name="submit">Upload file</button>
+				</div>
+			</form>
+		</div>
 	</div>
+		
