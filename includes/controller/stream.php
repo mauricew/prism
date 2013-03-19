@@ -67,12 +67,6 @@
 		
 		public static function index_table(Database $db) {
 			$output = "";
-			$output .= "<tr>
-				<th>Nickname</th>
-				<th>Server URL</th>
-				<th>Status</th>
-				<th>Options</th>
-			</tr>";
 			$result = $db->getTable("streams");
 			while($row = $result->fetch_assoc()) {
 				$stream = new Stream($row['nickname'], $row['hostname'], $row['username'], $row['password'], $row['mountpoint']);

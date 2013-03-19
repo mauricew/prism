@@ -114,14 +114,6 @@
 		
 		public static function index_table(Database $db) {
 			$output = "";
-			$output .= "
-			<tr>
-				<th>Name</th>
-				<th>Host(s)</th>
-				<th>Description</th>
-				<th>Timeslot</th>
-				<th>Options</th>
-			</tr>";
 			$result = $db->getTable("shows");
 			while($row = $result->fetch_assoc()) {
 				if($row['active'] == 1) {

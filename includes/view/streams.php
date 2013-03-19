@@ -36,6 +36,12 @@
 		</div>
 		</h2>
 		<table class="table">
+			<tr>
+				<th>Nickname</th>
+				<th>Server URL</th>
+				<th>Status</th>
+				<th>Options</th>
+			</tr>
 <?php	print Stream_Controller::index_table($db); ?>
 		</table>
 <?php } ?>

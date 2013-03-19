@@ -75,6 +75,13 @@
 			</div>
 		</h2>
 		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>Host(s)</th>
+				<th>Description</th>
+				<th>Timeslot</th>
+				<th>Options</th>
+			</tr>
 <?php 	print Show_Controller::index_table($db); ?>
 		</table>
 <?php	}	?>
