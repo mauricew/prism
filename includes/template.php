@@ -90,4 +90,16 @@
 		}
 		return "";
 	}
+	
+	function printGenericTable($data) {
+		$output = "";
+		foreach($data as $row) {
+			$output .= "<tr>";
+			foreach($row as $cell) {
+				$output .= "<td>$cell</td>";
+			}
+			$output .= "</tr>";
+		}
+		return $output;
+	}
 ?>
