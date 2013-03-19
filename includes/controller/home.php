@@ -51,8 +51,9 @@
 				while($row = $streams->fetch_assoc()) {
 					if($row['active'] == 1) {
 						$s = new Stream($row['nickname'], $row['hostname'], $row['username'], $row['password'], $row['mountpoint']);
-	?>					<dt><?php print '<h4>' . $s->nickname . ' <small>(' . $s->hostname . $s->mountpoint . ')</small></h4>'; ?></dt>
-						<dd><?php $s->live ? print "<h5 class=\"text-success\">Online, {$s->listeners} currently listening</h5>"
+						$sdata = $s->info();
+	?>					<dt><?php print '<h4>' . $sdata['nickname'] . ' <small>(' . $sdata['hostname'] . $sdata['mountpoint'] . ')</small></h4>'; ?></dt>
+						<dd><?php $sdata['live'] ? print "<h5 class=\"text-success\">Online, {$sdata['listeners']} currently listening</h5>"
 						: print "<h6 class=\"text-error\">Offline</h5>" ?></dd>
 <?php				}
 				}

@@ -76,18 +76,18 @@
 			$result = $db->getTable("streams");
 			while($row = $result->fetch_assoc()) {
 				$stream = new Stream($row['nickname'], $row['hostname'], $row['username'], $row['password'], $row['mountpoint']);
-				$stream->checkStatus();
+				$streamdata = $stream->info();
 				
-				$output .= "<tr class=\"" . (!$stream->live ? "error" : "") . "\">
-					<td>{$stream->nickname}</td>
-					<td><a href=\"http://{$stream->hostname}\">{$stream->hostname}</a>{$stream->mountpoint}</td>
+				$output .= "<tr class=\"" . (!$streamdata['live'] ? "error" : "") . "\">
+					<td>{$streamdata['nickname']}</td>
+					<td><a href=\"http://{$streamdata['hostname']}\">{$streamdata['hostname']}</a>{$streamdata['mountpoint']}</td>
 					<td>" . 
-					($stream->online
+					($streamdata['online']
 						? "<span class=\"text-success\">Online, </span>" 
 						: "<span class=\"text-error\">Offline</span>"
 					) . 
-					($stream->live
-						? "<span class=\"text-success\">Broadcasting</span> <span class=\"badge badge-inverse\" title=\"Current listener count\">$stream->listeners</span>" 
+					($streamdata['live']
+						? "<span class=\"text-success\">Broadcasting</span> <span class=\"badge badge-inverse\" title=\"Current listener count\">{$streamdata['listeners']}</span>" 
 						: "<span class=\"text-warning\">Not broadcasting</span>"
 					) .
 					"</td>

@@ -6,11 +6,12 @@
  */
  
  	class Stream {
-	 	public $nickname;
-	 	public $host;
-		public $username;
-	 	public $password;
-	 	public $mountpoint;
+	 	private $nickname;
+	 	private $host;
+		private $username;
+	 	private $password;
+	 	private $mountpoint;
+	 	
 		public $active;
 	 	public $online = false;
 	 	public $live = false;
@@ -23,6 +24,20 @@
 			$this->password = $password;
 			$this->mountpoint = $mountpoint;
 			$this->checkStatus();
+	 	}
+	 	
+	 	public function info() {
+		 	$arr = array(
+		 		"nickname"		=>	$this->nickname,
+		 		"hostname"		=>	$this->hostname,
+		 		"username"		=>	$this->username,
+		 		"password"		=>	$this->password,
+		 		"mountpoint"	=>	$this->mountpoint,
+		 		"online"		=> 	$this->online,
+		 		"live"			=> 	$this->live,
+		 		"listeners"		=>	$this->listeners
+		 	);
+		 	return $arr;
 	 	}
 	 	
 	 	public function getData() {
