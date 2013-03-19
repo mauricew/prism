@@ -3,6 +3,28 @@
 	isset($_GET['a']) ? $act = $_GET['a'] : $act = NULL;
 	new Show_Controller($db, $act);
 	
+	function csvConfirm($arr) { ?>
+		<h3>Import shows</h3>
+		<h5>Choose which shows you would like to import. Invalid entries are not displayed.</h5>
+		<form id="show-verifyCSV" name="verifyCSV" method="post" action="<?php print $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING']; ?>">
+			<table class="table">
+				<tr>
+					<th>&check;</th>
+					<th>Name</th>
+					<th>Host(s)</th>
+					<th>Description</th>
+					<th>Timeslot</th>
+				</tr>
+<?php		print Show_Controller::csv_table($arr); ?>
+			</table>
+			<input type="hidden" name="step" value="2" />
+			<div class="form-actions">
+				<button class="btn btn-primary" type="submit" name="submit">Submit</button>
+				<a class="btn" href="javascript:history.back();">Back</a>
+			</div>
+		</form>
+<?php	}
+
 	function form($obj = FALSE, $tsdata = NULL) { ?>
 		<form id="show-form" name="show-<?php print $_GET['a']; ?>" method="post" action="<?php print $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING']; ?>">
 		<div class="row">
@@ -70,7 +92,7 @@
 		<h2>
 			<span>Shows</span>
 			<div class="btn-toolbar pull-right" style="margin:0;">
-				<!--a class="btn" role="button" href="#schedule-import" data-toggle="modal"><i class="icon-file"></i>Import CSV</a-->
+				<a class="btn" role="button" href="#schedule-import" data-toggle="modal"><i class="icon-file"></i>Import CSV</a>
 				<a class="btn btn-inverse" href="./?p=schedule&a=add"><i class="icon-plus-sign icon-white"></i> Add new show</a>
 			</div>
 		</h2>
@@ -84,7 +106,6 @@
 			</tr>
 <?php 	print Show_Controller::index_table($db); ?>
 		</table>
-<?php	}	?>
 		<div id="schedule-import" class="modal hide" tabindex="-1" role="dialog">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -96,6 +117,7 @@
 					<p class="well"><strong>Name, Host, Description, Day of week, Start time, End time</strong></p>
 					<p>Only one timeslot supported.</p>
 					<input type="file" name="csv" />
+					<input type="hidden" name="step" value="1" />
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-success" type="submit" name="submit">Upload file</button>
@@ -103,4 +125,6 @@
 			</form>
 		</div>
 	</div>
+<?php	}	?>
+		
 		

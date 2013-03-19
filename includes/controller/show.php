@@ -87,16 +87,36 @@
 						header("Location: ./?p=schedule");
 					}
 				}
-				/*
+				
 				else if($act == "csv") {
 					if(isset($_POST['submit'])) {
-						if(isset($_FILES['csv'])) {
-							if($_FILES['csv']['type'] == "text/csv") {
-								print_r($_FILES['csv']);
+						if($_POST['step'] == 1 && isset($_FILES['csv'])) {
+							$this->parseCSV($_FILES['csv']);
+						}
+						else if($_POST['step'] == 2) {
+							$added_list = array();
+							for($i = 0; $i < count($_SESSION['csv_temp']); $i++) {
+								if(isset($_POST['csv-' . $i])) {
+									$show = new Show($db->escape($_SESSION['csv_temp'][$i][1]),
+										$db->escape($_SESSION['csv_temp'][$i][2]),
+										$db->escape($_SESSION['csv_temp'][$i][3]), 
+										array(array(
+											"day" => $db->escape($_SESSION['csv_temp'][$i][4]),
+											"start_time" => date("G:i", strtotime($db->escape($_SESSION['csv_temp'][$i][5]))),
+											"end_time" => date("G:i", strtotime($db->escape($_SESSION['csv_temp'][$i][6])))
+										))
+									);
+									$show->add($db);
+									$added_list[] = $show->name;
+								}
 							}
-							else {
-								print "Not csv";
+							$output = "";
+							foreach($added_list as $sname) {
+								$output .= "<li>$sname</li>";
 							}
+							unset($_SESSION['csv_temp']);
+							printAlert("success", "<strong>Successful import of the following shows:</strong><br><ul>$output</ul>");
+							header("Refresh: 3;url=./?p=schedule");
 						}
 						else {
 							// Error handle here
@@ -105,13 +125,52 @@
 				}
 				else {
 				}
-			*/
+			
 			}
 			else {
 				print index($db);
 			}
 		}
 		
+		public function parseCSV($file) {
+			if($file['type'] == "text/csv") {
+				if(($handle = fopen($file['tmp_name'], "r")) !== FALSE) {
+					while(($raw = fgetcsv($handle)) !== FALSE) {
+						$valid = false;
+						if(is_string($raw[0]) && is_string($raw[1]) && is_string($raw[2]) && strtotime($raw[3]) !== FALSE && strtotime($raw[4]) !== FALSE && strtotime($raw[5]) !== FALSE)
+							$valid = true;
+						array_unshift($raw, $valid);
+						$data[] = $raw;
+					}
+					$_SESSION['csv_temp'] = $data;
+					csvConfirm($data);
+					fclose($handle);
+				}
+				else {
+					print "Error reading file";
+				}
+			}
+			else {
+				print "Not csv";
+			}
+		}
+
+		public static function csv_table($data) {
+			$output = "";
+			for($i = 0; $i < count($data); $i++) {
+				if($data[$i][0]) {
+					$output .= "<tr>";
+					$output .= "<td><input type=\"checkbox\" name=\"csv-$i\" /></td>";
+					$output .= "<td>{$data[$i][1]}</td>";
+					$output .= "<td>{$data[$i][2]}</td>";
+					$output .= "<td>{$data[$i][3]}</td>";
+					$output .= "<td>{$data[$i][4]} {$data[$i][5]} - {$data[$i][6]}</td>";
+					$output .= "</tr>";
+				}
+			}
+			return $output;
+		}
+
 		public static function index_table(Database $db) {
 			$output = "";
 			$result = $db->getTable("shows");
