@@ -6,11 +6,11 @@
  */
  
 	class Show {
-		public $name;
-		public $description;
-		public $hosts;
-		public $timeslots;
-		public $active;
+		private $name;
+		private $description;
+		private $hosts;
+		private $timeslots;
+		private $active;
 	
 		public function __construct($name, $hosts, $description, $timeslots) {
 			$this->name = $name;
@@ -18,6 +18,15 @@
 			$this->description = $description;
 			$this->timeslots = $timeslots;
 			$this->active = 1;
+		}
+		
+		public function info() {
+			return array(
+				"name"			=> $this->name,
+				"hosts"			=> $this->hosts,
+				"description" 	=> $this->description,
+				"timeslots" 	=> $this->timeslots
+			);
 		}
 		
 		public function add(Database $db) {

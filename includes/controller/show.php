@@ -64,19 +64,20 @@
 							$show = Show::get($db, $_GET['id']);
 							if(is_null($show))
 								header("Location: ./?p=schedule");
-							if(count($show->timeslots) > 0) {
+							$showdata = $show->info();
+							if(count($showdata['timeslots']) > 0) {
 								$tsdata = array(
-									"day" => $show->timeslots[0]['day'], 
-									"start_time-hour" => date("g", strtotime($show->timeslots[0]['start_time'])),
-									"start_time-minute" => date("i", strtotime($show->timeslots[0]['start_time'])),
-									"start_time-ampm" => date("A", strtotime($show->timeslots[0]['start_time'])),
-									"end_time-hour" => date("g", strtotime($show->timeslots[0]['end_time'])),
-									"end_time-minute" => date("i", strtotime($show->timeslots[0]['end_time'])),
-									"end_time-ampm" => date("A", strtotime($show->timeslots[0]['end_time']))
+									"day" => $showdata['timeslots'][0]['day'], 
+									"start_time-hour" => date("g", strtotime($showdata['timeslots'][0]['start_time'])),
+									"start_time-minute" => date("i", strtotime($showdata['timeslots'][0]['start_time'])),
+									"start_time-ampm" => date("A", strtotime($showdata['timeslots'][0]['start_time'])),
+									"end_time-hour" => date("g", strtotime($showdata['timeslots'][0]['end_time'])),
+									"end_time-minute" => date("i", strtotime($showdata['timeslots'][0]['end_time'])),
+									"end_time-ampm" => date("A", strtotime($showdata['timeslots'][0]['end_time']))
 								);
 							}
 							echo("<h2>Modify show <small>id #{$_GET['id']}</h2>	");
-							form($show, $tsdata);
+							form($showdata, $tsdata);
 						}
 					
 					}
@@ -177,15 +178,16 @@
 			while($row = $result->fetch_assoc()) {
 				if($row['active'] == 1) {
 					$show = Show::get($db, $row['id']);
+					$showdata = $show->info();
 					$output .= "
 					<tr>
-					<td>{$row['name']}</td>
-					<td>{$row['host']}</td>
-					<td>{$row['description']}</td>";
-					if(count($show->timeslots) > 1)
+					<td>{$showdata['name']}</td>
+					<td>{$showdata['hosts']}</td>
+					<td>{$showdata['description']}</td>";
+					if(count($showdata['timeslots']) > 1)
 						$output .= "<td>Multiple</td>";
 					else
-						$output .= "<td>{$show->timeslots[0]['day']} " . date("g:ia", strtotime($show->timeslots[0]['start_time'])) . " - " . date("g:ia", strtotime($show->timeslots[0]['end_time'])) . "</td>";
+						$output .= "<td>{$showdata['timeslots'][0]['day']} " . date("g:ia", strtotime($showdata['timeslots'][0]['start_time'])) . " - " . date("g:ia", strtotime($showdata['timeslots'][0]['end_time'])) . "</td>";
 					$output .= "<td><div class=\"btn-group\">
 						<button class=\"btn dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-cog\"></i><span class=\"caret\"></span></button>
 						<ul class=\"dropdown-menu\">

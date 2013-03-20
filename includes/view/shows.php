@@ -31,11 +31,11 @@
 			<div id="show-info" class="span3">
 				<h4>Basic info</h4>
 				<label for="name">Name</label>
-				<input type="text" name="name" value="<?php !$obj ?: print $obj->name; ?>" />
+				<input type="text" name="name" value="<?php !$obj ?: print $obj['name']; ?>" />
 				<label for="hosts">Host(s)</label>
-					<input type="text" name="hosts" value="<?php !$obj ?: print $obj->hosts; ?>" />
+					<input type="text" name="hosts" value="<?php !$obj ?: print $obj['hosts']; ?>" />
 				<label for="description">Description</label>
-					<textarea name="description" rows="6" cols="40"><?php !$obj ?: print $obj->description; ?></textarea>
+					<textarea name="description" rows="6" cols="40"><?php !$obj ?: print $obj['description']; ?></textarea>
 				
 			</div>
 				<div id="show-timeslots" class="span8 offset1">
