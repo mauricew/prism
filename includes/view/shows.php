@@ -68,7 +68,7 @@
 					<label>End time</label>
 						<select class="input-mini" name="end-time-hour">
 <?php 					foreach(printHours() as $t) { ?>
-						<option<?php !is_null($tsdata) && $tsdata['end_time-hour'] == $t ? print " selected" : print ""; ?>><?php print $t; ?></option>
+						<option<?php $t != 12 ?: print " value=\"0\"" ?><?php !is_null($tsdata) && $tsdata['end_time-hour'] == $t ? print " selected=\"selected\"" : print ""; ?>><?php print $t; ?></option>
 						<?php } ?>						</select>
 						<span>:</span>
 						<input class="input-mini" type="number" name="end-time-minute" min="00" max="59" value="<?php !is_null($tsdata) ? print $tsdata['end_time-minute'] : print "00" ?>" />
