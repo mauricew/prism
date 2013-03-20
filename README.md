@@ -3,10 +3,11 @@ Prism
 #####A Pretty Robust Internet [Radio] Station Management Tool
 
 Prism is the culmination of the need for a separate radio station management panel without having to resort to complicated interfaces and features with software like Airtime. The plan is to have schedule management, realtime logging, and a hope for configuring the output server and audio streamer without having to touch configuration files.
-At the time of this writing this application is at version **0.1**, which can:
----------
-* Create/Retrieve/Update/Delete shows and streams
-* Show an informational dashboard on the homepage
+
+#### Current version: **0.2.1**
+* Create/Retrieve/Update/Delete shows and streams, as before
+* Import shows from CSV
+* Safer OOP practices
 
 Requirements
 ---------
@@ -17,14 +18,12 @@ Requirements
 
 Installation
 ---------
-If no install currently exists, you will be pointed to run install.php.
+If no install currently exists, you will be pointed to run install.php. You will need to have a running MySQL server, and the database you create must not currently exist. (This will change before beta!)
 
 Why?
 ---------
 Before 2011, our live broadcasted shows over at [Knightcast](http://knightcast.org/) were done with a SHOUTcast server that required the show host to manually hit a button to start a show, and was locally recorded. That year brought us a cool guy that switched us to Icecast2 and showed me (and everyone else) the wonders of liquidsoap, which provided close to full automation for our station and recording on our central server. I became the studio director the next year, and rolled with it.
 
-But come 2013, the director of the umbrella organization with covered this and the other biggest, most funded groups on campus gave me a nod that all sites were switching to a Wordpress base. I've had to deal with a slightly convoluted procedure to manage shows; described in one sentence: we used a show content type in Drupal that was checked every minute by liquidsoap to see if one was happening, and if there was one along with the audio in the studio it would kick in with the proper metadata and archive recording. The dependency of a specific software platform that probably less than 1% of the student body (of a 60k person school, mind you) can understand is a bit of a pain in case my replacement 2 years down the road wanted to know what the hell to do.
+With my departure, it gives the challenge of new, non-technically inclined people to deal with Drupal, which is how our liquidsoap server labels and records shows. Since the rest of the school had a 2013 plan to switch to Wordpress, this app helps simplify the automation of show metadata, recording, and logging (a homebrew system with flat files is currently what I have in place).
 
-So go forth into the world, my little prism, and preach the wonders of **free** and **simple** internet radio automation.
-
-
+I work towards giving simple, free, and a non-overwhelming way of managing an online radio station with Prism.
