@@ -37,7 +37,7 @@
 					<ul class="nav">
 						<li<?php print checkPageTitle("streams"); ?>><a href="./?p=streams">Streams</a></li>
 						<li<?php print checkPageTitle("schedule"); ?>><a href="./?p=schedule">Schedule</a></li>
-						<li<?php print checkPageTitle("logs"); ?>><a href="#">Logs</a></li>
+						<li<?php print checkPageTitle("logs"); ?>><a href="./?p=logs">Logs</a></li>
 						<li><?php print checkPageTitle("settings"); ?><a href="#">Settings</a></li>
 					</ul>
 					<ul class="nav pull-right">

@@ -64,7 +64,10 @@
 				include("includes/controller/show.php");
 				include("includes/view/shows.php");
  				break;
- 			case "statistics":
+ 			case "logs":
+				printNav();
+				include("includes/controller/log.php");
+				include("includes/view/logs.php");
  				break;
  			case "settings":
  				break;
