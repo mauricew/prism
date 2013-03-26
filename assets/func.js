@@ -83,4 +83,8 @@ $(document).ready(function() {
 			}
 		});
 	});
+	$("form button[type=reset]").on('click', function(e) {
+		$(".btn-group .btn").removeClass("active");
+		$("input[type=hidden]").val("");
+	});
 });

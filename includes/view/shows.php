@@ -83,6 +83,7 @@
 		<div class="form-actions">
 			<button class="btn btn-primary" type="submit" name="submit"><?php !$obj ? print "Add" : print "Update" ?></button>
 			<?php !$obj ?: print "<button class=\"btn btn-danger\">Delete</button>" ?>
+			<?php $obj ?: print "<button class=\"btn\" type=\"reset\">Reset</button>" ?>
 			<a class="btn" href="javascript:history.back();">Back</a>
 		</div>
 		</form>
