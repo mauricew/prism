@@ -18,11 +18,11 @@
 	}
 	
 	if(php_sapi_name() != "cli") {
-		exit("This file can only be ran as a server script.");
+		exit("This script can only be executed on the command line.");
 	}
 
 	if($argc < 2) {
-		exit("\nUSAGE:\napi.php [command]\n\nCOMMANDS:\nstreams\t\tDisplay list of streams\nschedule\tDisplay schedule\n\n");
+		exit("Pretty Robust Internet Station Management API\n\nUSAGE:\napi.php [command]\n\nCOMMANDS:\nlognow\t\tLog all active streams\nstreams\t\tDisplay list of streams\nschedule\tDisplay schedule\n\n");
 	}
 	
 	$cmd = $argv[1];
@@ -31,6 +31,20 @@
 	$output = array();
 	
 	switch($cmd) {
+		case "lognow":
+			$curTime = time();
+			$allstreams = $db->getTable("streams");
+			while($row = $allstreams->fetch_assoc()) {
+				if($row['active'] == 1) {
+					$id = $row['id'];
+					$stream = new Stream($row['nickname'], $row['hostname'], $row['username'], $row['password'], $row['mountpoint']);
+					if($stream->live) {
+						$info = $stream->info();
+						$db->query("insert into logs(`stream_id`, `time`, `listeners`) values ($id, $curTime, {$info['listeners']})");
+					}
+				}
+			}
+			break;
 		case "streams":
 			$result = $db->getTable("streams");
 			while($row = $result->fetch_assoc()) {
@@ -38,22 +52,20 @@
 				unset($row['password']);
 				$output[] = $row;
 			}
+			header("Content-type: application/json");
+			print json_encode($output);
 			break;
 		case "schedule":
 			$result = $db->getTable("shows");
 			while($row = $result->fetch_assoc()) {
 				$output[] = $row;
 			}
+			header("Content-type: application/json");
+			print json_encode($output);
 			break;
 		default:
 			exit("Invalid command specified.\n");
 			break;
 	}
-
-	
-	
-	header("Content-type: application/json");
-	//print json_encode(array("message"=>"This is only a test. Passwords will be removed in the final product."));
-	print json_encode($output);
 	
 ?>
