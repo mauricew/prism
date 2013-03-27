@@ -45,44 +45,24 @@
 	}
 	
 	$page = NULL;
-
 	if(isset($_GET['p']))
 		$page = $_GET['p'];
 
 	if($_SESSION['logged_in'] == true) {
-	 	switch ($page) {
-			case "login":
-				header("Location: ./");
-				break;
-			case "logout":
-				if(isset($_SESSION['logged_in']))
-					$user->logout();
-				header("Location: ./");
-				break;
- 			case "schedule":
-				printNav();
-				include("includes/controller/show.php");
-				include("includes/view/shows.php");
- 				break;
- 			case "logs":
-				printNav();
-				include("includes/controller/log.php");
-				include("includes/view/logs.php");
- 				break;
- 			case "settings":
- 				break;
-			case "streams":
-				printNav();
-				include("includes/controller/stream.php");
-				include("includes/view/streams.php");
-				break;
-			default:
-				printNav();
-				include("includes/controller/home.php");
-				include("includes/view/home.php");
-				break;
+		printNav();
+		$contPath = "includes/controller/$page.php";
+		$viewPath = "includes/view/$page.php";
+		if(file_exists($contPath) && file_exists($viewPath)) {
+			require($contPath);
+			require($viewPath);
+		}
+		else {
+			printNav();
+			include("includes/controller/home.php");
+			include("includes/view/home.php");
 		}
 	}
+	
 	else {
 		switch($page) {
 			case "login":
@@ -100,3 +80,4 @@
  	printFooter();
  	$db->close();
 ?>
+
