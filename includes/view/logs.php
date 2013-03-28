@@ -12,7 +12,11 @@
 				<th>Timestamp</th>
 				<th>Listener count</th>
 			</tr>
-<?php	print Logs_Controller::table($db); ?>
+<?php	$data = Logs_Controller::getData($db, null);
+		foreach($data as $entry) {
+			print "<tr><td>{$entry['streamname']}</td><td>" . date("c", $entry['time']) . "</td><td>{$entry['listeners']}</td></tr>";
+		}
+?>
 		</table>
 <?php	}
 ?>

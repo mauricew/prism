@@ -12,7 +12,7 @@
 					break;
 			}
 		}
-		public static function table(Database $db) {
+		public static function getData(Database $db, $date) {
 			$data = array();
 			$result = $db->query("SELECT * from logs inner join streams on streams.id = logs.stream_id WHERE streams.active = 1");
 			while($row = $result->fetch_assoc()) {
@@ -22,12 +22,13 @@
 					"time" => $row['time'],
 					"listeners" => $row['listeners']
 				);
-			}
+			} return $data;
+/*
 			$output = "";
 			foreach($data as $entry) {
 				$output .= "<tr><td>{$entry['streamname']}</td><td>" . date("c", $entry['time']) . "</td><td>{$entry['listeners']}</td></tr>";
 			}
 			return $output;
-		}
+*/		}
 	}
 ?>
