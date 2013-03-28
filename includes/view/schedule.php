@@ -1,8 +1,4 @@
-<div class="container">
 <?php
-	isset($_GET['a']) ? $act = $_GET['a'] : $act = NULL;
-	new Show_Controller($db, $act);
-	
 	function csvConfirm($arr) { ?>
 		<h3>Import shows</h3>
 		<h5>Choose which shows you would like to import. Invalid entries are not displayed.</h5>
@@ -15,7 +11,7 @@
 					<th>Description</th>
 					<th>Timeslot</th>
 				</tr>
-<?php		print Show_Controller::csv_table($arr); ?>
+<?php		print Schedule_Controller::csv_table($arr); ?>
 			</table>
 			<input type="hidden" name="step" value="2" />
 			<div class="form-actions">
@@ -105,7 +101,7 @@
 				<th>Timeslot</th>
 				<th>Options</th>
 			</tr>
-<?php 	print Show_Controller::index_table($db); ?>
+<?php 	print Schedule_Controller::index_table($db); ?>
 		</table>
 		<div id="schedule-import" class="modal hide" tabindex="-1" role="dialog">
 			<div class="modal-header">
@@ -127,5 +123,3 @@
 		</div>
 	</div>
 <?php	}	?>
-		
-		

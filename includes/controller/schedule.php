@@ -1,5 +1,5 @@
 <?php
-	class Show_Controller {
+	class Schedule_Controller {
 		public function __construct(Database $db, $act) {
 			if(!is_null($act)) {
 				if($act == "add") {

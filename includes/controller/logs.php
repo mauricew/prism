@@ -4,7 +4,7 @@
  *	Created by Maurice Wahba, (c)2013
  */
 
-	class Log_Controller {
+	class Logs_Controller {
 		public function __construct(Database $db, $act) {
 			switch($act) {
 				default:

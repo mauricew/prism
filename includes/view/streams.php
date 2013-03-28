@@ -1,8 +1,4 @@
-	<div class="container">
 <?php
-	isset($_GET['a']) ? $act = $_GET['a'] : $act = NULL;
-	new Stream_Controller($db, $act);
-	
 	function form($obj = FALSE) { 
 		if($obj) $data = $obj->info();
 ?>
@@ -43,7 +39,6 @@
 				<th>Status</th>
 				<th>Options</th>
 			</tr>
-<?php	print Stream_Controller::index_table($db); ?>
+<?php	print Streams_Controller::index_table($db); ?>
 		</table>
 <?php } ?>
-	</div>

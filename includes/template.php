@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="assets/func.js"></script>
 </head>
 <body>
+	<div class="container">
 <?php 	}
 	function printNav() {
 	?>
@@ -58,8 +59,9 @@
 <?php 	} 
 	
 	function printFooter() { ?>
-		</body>
-		</html>
+	</div>
+</body>
+</html>
 <?php	}
 	
 	function printAlert($type, $message) {

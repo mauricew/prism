@@ -55,6 +55,8 @@
 		if(file_exists($contPath) && file_exists($viewPath)) {
 			require($contPath);
 			require($viewPath);
+			isset($_GET['a']) ? $act = $_GET['a'] : $act = NULL;
+			eval('new ' . ucfirst($page). '_Controller($db, $act);');
 		}
 		else {
 			printNav();
