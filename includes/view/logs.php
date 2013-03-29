@@ -4,16 +4,17 @@
  *	Created by Maurice Wahba, (c)2013
  */
 
-	function index(Database $db) { ?>
-		<h2><span>Logs</span></h2>
+	function index($data) { ?>
+		<div id="header">
+			<h2>Logs</h2>
+		</div>
 		<table class="table">
 			<tr>
 				<th>Stream nickname</th>
 				<th>Timestamp</th>
 				<th>Listener count</th>
 			</tr>
-<?php	$data = Logs_Controller::getData($db, null);
-		foreach($data as $entry) {
+<?php	foreach($data as $entry) {
 			print "<tr><td>{$entry['streamname']}</td><td>" . date("c", $entry['time']) . "</td><td>{$entry['listeners']}</td></tr>";
 		}
 ?>

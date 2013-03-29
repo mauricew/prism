@@ -8,7 +8,8 @@
 		public function __construct(Database $db, $act) {
 			switch($act) {
 				default:
-					index($db);
+					isset($_GET['d']) ? $date = $_GET['d'] : $date = date("Y-m-d");
+					index(Logs_Controller::getData($db, $date));
 					break;
 			}
 		}

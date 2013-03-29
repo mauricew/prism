@@ -12,6 +12,20 @@ body {
 	padding-top: 50px;
 }
 
+#header {
+	margin: 10px 0;
+	position: relative;
+}
+
+#header h2 {
+	margin: 0;
+}
+
+#header .btn-toolbar {
+	margin: 0;
+	line-height: 40px;
+}
+
 #show-timeslots .timeslot .btn-group {
 	top: -5px;
 }

@@ -1,5 +1,5 @@
 <?php
-	function form($obj = FALSE) { 
+	function form($obj = FALSE) {
 		if($obj) $data = $obj->info();
 ?>
 		<form name="stream-<?php print $_GET['a']; ?>" method="post" action="<?php print $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING']; ?>">
@@ -26,12 +26,12 @@
 <?php }
 	function index(Database $db) {
 	 ?>
-		<h2>
-			<span>Streams</span>
-			<div class="btn-group pull-right">
-				<a class="btn btn-inverse" href="./?p=streams&a=add"><i class="icon-plus-sign icon-white"></i> Add new stream</a>
+		<div id="header" class="row">
+			<h2 class="pull-left">Streams</h2>
+			<div class="btn-toolbar pull-right">
+				<a class="btn btn-inverse" href="./?p=streams&a=add"><i class="icon-plus-sign icon-white"></i> <strong>Add new stream</strong></a>
+			</div>
 		</div>
-		</h2>
 		<table class="table">
 			<tr>
 				<th>Nickname</th>
