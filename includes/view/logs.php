@@ -4,9 +4,12 @@
  *	Created by Maurice Wahba, (c)2013
  */
 
-	function index($data) { ?>
-		<div id="header">
-			<h2>Logs</h2>
+	function index($date, $data) { ?>
+		<div id="header" class="row">
+			<h2 class="pull-left">Logs</h2>
+			<div class="pull-right">
+				<?php print Logs_Controller::pagerControl($date); ?>
+			</div>
 		</div>
 		<table class="table">
 			<tr>

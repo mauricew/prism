@@ -30,6 +30,12 @@ body {
 	top: -5px;
 }
 
+#logpager {
+	display:inline-block;
+	margin:0;
+	vertical-align:middle;
+}
+
 @media screen and (max-width: 979px) {
 	body {
 		padding-top: 0px;
