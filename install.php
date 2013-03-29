@@ -155,12 +155,14 @@
 					<p class="lead">You have successfully completed the install process of Prism. Here's a few tips to get you off the ground first.</p>
 					
 					<h4>Current show title</h4>
-					<p>When you add a stream to the management panel, you can have the metadata be updated automatically if you use the proper software (<a href="http://liquidsoap.fm" target="_blank">liquidsoap</a> highly recommended, but you can use a different solution like <a href="https://npmjs.org/package/icecast" target="_blank">nodejs icecast</a>.</p>
+					<p>When you add a stream to the management panel, you can have the metadata be updated automatically if you use the proper software (<a href="http://liquidsoap.fm" target="_blank">liquidsoap</a> highly recommended, but you can use a different solution like <a href="https://npmjs.org/package/icecast" target="_blank">nodejs icecast</a>).</p>
 					<p><em>This functionality is not yet implemented.</em></p>
 					<br>
 					<h4>Logging</h4>
-					<p>You will only be able to use logging if you have access to cron jobs. This does not depend on the root account; it can be any account on the server.</p>
-					<p><em>This functionality is not yet implemented.</em></p>
+					<p>You will only be able to use automatic logging if you have access to cron jobs. This does not depend on the root account; it can be any account on the server.</p>
+					<p>It's best to set your system to log every minute, but you can change the frequency if you feel like it. Edit your cron (with <code>crontab -e</code>) and add this line:</p>
+					
+					<pre>* * * * * php /path/to/prism/api.php lognow</pre>
 					
 					<hr>
 					<p class="lead muted">Get ready.</p>
