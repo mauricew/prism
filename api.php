@@ -4,6 +4,8 @@
  *	Created by Maurice Wahba, (c)2013
  *	Licensed by GPLv3, powered by cynicism
  */
+	chdir(dirname(__FILE__));
+	
 	require("includes/model/database.php");
  	require("includes/model/user.php");
  	require("includes/model/stream.php");
@@ -22,7 +24,9 @@
 	}
 
 	if($argc < 2) {
-		exit("Pretty Robust Internet Station Management API\n\nUSAGE:\napi.php [command]\n\nCOMMANDS:\nlognow\t\tLog all active streams\nstreams\t\tDisplay list of streams\nschedule\tDisplay schedule\n\n");
+		exit("Pretty Robust Internet Station Management API\n\n" .
+		"USAGE:\napi.php [command]\n\n" .
+		"COMMANDS:\nlognow\t\t\tLog all active streams\nstreams\t\t\tDisplay list of streams\nschedule\t\tDisplay schedule\n\n");
 	}
 	
 	$cmd = $argv[1];
