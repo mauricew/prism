@@ -8,7 +8,7 @@
 		<div id="header" class="row">
 			<h2 class="pull-left">Logs</h2>
 			<div class="pull-right">
-				<?php print Logs_Controller::pagerControl($date); ?>
+				<?php print Logs_Controller::toolbarControl($date); ?>
 			</div>
 		</div>
 		<table class="table">

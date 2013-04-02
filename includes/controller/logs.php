@@ -9,11 +9,45 @@
 			switch($act) {
 				default:
 					isset($_GET['d']) ? $date = $_GET['d'] : $date = date("Y-m-d");
-					index($date, Logs_Controller::getData($db, $date));
-					break;
+					isset($_GET['v']) ? $period = $_GET['v'] : $period = "d";
+					switch($period) {
+						case "w":
+							index($date, Logs_Controller::getDataWeek($db, $date));
+							break;
+						default:
+							index($date, Logs_Controller::getDataDay($db, $date));
+							break;
+					}
+				break;
 			}
 		}
-		public static function getData(Database $db, $date) {
+		
+		public static function getDataWeek(Database $db, $date) {
+			$data = array();
+			if(date("D", strtotime($date)) != "Sun") {
+				$startDate = date("Y-m-d", strtotime("last Sunday", strtotime($date)));
+			}
+			else {
+				$startDate = $date;
+			}
+			if(date("D", strtotime($date)) != "Sat") {
+				$endDate = date("Y-m-d", strtotime("next Saturday", strtotime($date)));
+			}
+			else {
+				$endDate = $date;
+			}
+			$result = $db->query("SELECT * from logs inner join streams on streams.id = logs.stream_id WHERE streams.active = 1 AND date(from_unixtime(time)) between '$startDate' and '$endDate'");
+			while($row = $result->fetch_assoc()) {
+				$data[] = array(
+					"streamid" => $row['stream_id'],
+					"streamname" => $row['nickname'],
+					"time" => $row['time'],
+					"listeners" => $row['listeners']
+				);
+			} return $data;			
+		}
+		
+		public static function getDataDay(Database $db, $date) {
 			$data = array();
 			$result = $db->query("SELECT * from logs inner join streams on streams.id = logs.stream_id WHERE streams.active = 1 AND date(from_unixtime(time)) = '$date'");
 			while($row = $result->fetch_assoc()) {
@@ -26,13 +60,32 @@
 			} return $data;
 		}
 		
-		public static function pagerControl($date) { ?>
-		<span>Viewing data on <strong><?php print date("M d Y", strtotime($date)); ?></strong></span>
+		public static function toolbarControl($date) {
+			isset($_GET['v']) ? $period = $_GET['v'] : $period = null;
+			switch($period) {
+				case "w":
+					$startDate = date("Y-m-d", strtotime($date . " -7 days"));
+					$endDate = date("Y-m-d", strtotime($date . " +7 days"));
+					break;
+				default:
+					$startDate = date("Y-m-d", strtotime($date . " -1 day"));
+					$endDate = date("Y-m-d", strtotime($date . " +1 day"));
+					break;	
+			}		
+?>
+		<div id="logView" class="btn-group">
+			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">View<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li<?php if($period == "d" || is_null($period))  print " class=\"active\"" ?>><a href="./?p=logs&v=d&d=<?php print $date; ?>">Day</a></li>
+				<li<?php if($period == "w") print " class=\"active\"" ?>><a href="./?p=logs&v=w&d=<?php print $date; ?>">Week</a></li>
+			</ul>
+		</div>
+		<span>Viewing data for <?php isset($_GET['v']) && $_GET['v'] == "w" ? print "the week of " : ""; ?><strong><?php print date("M d Y", strtotime($date)); ?></strong></span>
 		<div id="logpager" class="pagination">
 			<ul>
-				<li><a href="./?p=logs&d=<?php print date("Y-m-d", strtotime($date . " -1 day")) ?>">Previous</a></li>
+				<li><a href="./?p=logs<?php !isset($period) ?: print "&v=$period"; ?>&d=<?php print $startDate; ?>">Previous</a></li>
 				<?php if(strtotime(date("Y-m-d")) > strtotime(date("Y-m-d", strtotime($date)))) { ?>
-				<li><a href="./?p=logs&d=<?php print date("Y-m-d", strtotime($date . " +1 day")) ?>">Next</a></li>
+				<li><a href="./?p=logs<?php !isset($period) ?: print "&v=$period"; ?>&d=<?php print $endDate; ?>">Next</a></li>
 				<?php } ?>
 			</ul>
 		</div>
