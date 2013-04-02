@@ -43,6 +43,15 @@
 				}
     	        exit();
 	            break;
+			case "listeners":
+				if(isset($_GET['id']) && is_numeric($_GET['id'])) {
+	                $stream = Stream::get($db, $_GET['id']);
+					$stream->checkStatus();
+					if(!is_null($stream) && $stream->live) {
+						print $stream->listeners;
+					}
+				}
+				break;
 			default:
 				exit("For usage details, please run this as a command line script.");
 				break;

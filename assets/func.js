@@ -48,8 +48,13 @@ function streamStatus(streamID, element) {
 			var statusResult = $("<span></span>");
 			switch(data) {
 				case "3":
-					statusResult.text("Online, Broadcasting");
-					statusResult.addClass("text-success");			
+					statusResult.text("Online, Broadcasting ");
+					statusResult.addClass("text-success");	
+					var listenerCount = $("<span class=\"badge badge-inverse\"></span>");
+					$.get("./api.php", {a: "listeners", id: streamID}, function(lCount, stat2) {
+						listenerCount.text(lCount);
+						statusResult.append(listenerCount);
+					});		
 					break;
 				case "2":
 					//IMPOSSIBRU!
