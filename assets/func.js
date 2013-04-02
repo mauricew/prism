@@ -41,6 +41,33 @@ function relativeTime(t) {
 	
 }
 
+function streamStatus(streamID, element) {
+	$.get("./api.php",
+		{a: "streamstatus", id: streamID},
+		function(data, status) {
+			var statusResult = $("<span></span>");
+			switch(data) {
+				case "3":
+					statusResult.text("Online, Broadcasting");
+					statusResult.addClass("text-success");			
+					break;
+				case "2":
+					//IMPOSSIBRU!
+					break;
+				case "1":
+					statusResult.text("Online, Not Broadcasting");
+					statusResult.addClass("text-warning");
+					break;
+				default:
+					statusResult.text("Offline");
+					statusResult.addClass("text-error");
+					break;
+			}
+			element.empty().append(statusResult);
+		}
+	);
+}
+
 $(document).ready(function() {
 	$("#lolzor").text("Nothing");
 	/*setInterval(function() { $("#home .relative-now").text(
@@ -86,5 +113,16 @@ $(document).ready(function() {
 	$("form button[type=reset]").on('click', function(e) {
 		$(".btn-group .btn").removeClass("active");
 		$("input[type=hidden]").val("");
+	});
+	$("#streams-table tr:not(:first-child)").each(function() {
+		var row = $(this);
+		var statusCell = $(this).find(".status");
+		var streamID = $(this).attr("id").split('-')[1];
+		streamStatus(streamID, statusCell);
+	});
+	$("#livestats dd").each(function() {
+		var streamInfo = $(this);
+		var streamID = $(this).attr("id").split('-')[1];
+		streamStatus(streamID, streamInfo);
 	});
 });

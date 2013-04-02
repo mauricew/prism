@@ -70,22 +70,12 @@
 			$result = $db->getTable("streams");
 			while($row = $result->fetch_assoc()) {
 				$stream = new Stream($row['nickname'], $row['hostname'], $row['username'], $row['password'], $row['mountpoint']);
-				$stream->checkStatus();
 				$streamdata = $stream->info();
 				
-				$output .= "<tr id=\"stream-{$row['id']}\" class=\"stream " . (!$streamdata['live'] ? "error" : "") . "\">
+				$output .= "<tr id=\"stream-{$row['id']}\">
 					<td>{$streamdata['nickname']}</td>
 					<td><a href=\"http://{$streamdata['hostname']}\">{$streamdata['hostname']}</a>{$streamdata['mountpoint']}</td>
-					<td class=\"status\">" .
-					($streamdata['online']
-						? "<span class=\"text-success\">Online, </span>"
-						: "<span class=\"text-error\">Offline</span>"
-					) .
-					($streamdata['live']
-						? "<span class=\"text-success\">Broadcasting</span> <span class=\"badge badge-inverse\" title=\"Current listener count\">{$streamdata['listeners']}</span>" 
-						: "<span class=\"text-warning\">Not broadcasting</span>"
-					) .
-					"</td>
+					<td class=\"status\">Loading...</td>
 					<td><div class=\"btn-group\">
 					<button class=\"btn dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-cog\"></i><span class=\"caret\"></span></button>
 					<ul class=\"dropdown-menu\">
