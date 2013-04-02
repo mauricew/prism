@@ -68,7 +68,9 @@ function streamStatus(streamID, element) {
 					statusResult.addClass("text-error");
 					break;
 			}
-			element.empty().append(statusResult);
+			element.fadeOut('slow', function() {
+				element.html(statusResult).fadeIn();
+			});
 		}
 	);
 }
