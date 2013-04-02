@@ -11,7 +11,7 @@
 				<?php print Logs_Controller::toolbarControl($date); ?>
 			</div>
 		</div>
-		<table class="table">
+		<table id="logs-table" class="table">
 			<tr>
 				<th>Stream nickname</th>
 				<th>Timestamp</th>

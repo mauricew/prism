@@ -94,7 +94,7 @@
 			</div>
 		</div>
 		</h2>
-		<table class="table">
+		<table id="schedule-table" class="table">
 			<tr>
 				<th>Name</th>
 				<th>Host(s)</th>

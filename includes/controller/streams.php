@@ -73,14 +73,14 @@
 				$stream->checkStatus();
 				$streamdata = $stream->info();
 				
-				$output .= "<tr class=\"" . (!$streamdata['live'] ? "error" : "") . "\">
+				$output .= "<tr id=\"stream-{$row['id']}\" class=\"stream " . (!$streamdata['live'] ? "error" : "") . "\">
 					<td>{$streamdata['nickname']}</td>
 					<td><a href=\"http://{$streamdata['hostname']}\">{$streamdata['hostname']}</a>{$streamdata['mountpoint']}</td>
-					<td>" . 
+					<td class=\"status\">" .
 					($streamdata['online']
-						? "<span class=\"text-success\">Online, </span>" 
+						? "<span class=\"text-success\">Online, </span>"
 						: "<span class=\"text-error\">Offline</span>"
-					) . 
+					) .
 					($streamdata['live']
 						? "<span class=\"text-success\">Broadcasting</span> <span class=\"badge badge-inverse\" title=\"Current listener count\">{$streamdata['listeners']}</span>" 
 						: "<span class=\"text-warning\">Not broadcasting</span>"

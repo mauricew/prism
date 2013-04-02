@@ -32,7 +32,7 @@
 				<a class="btn btn-inverse" href="./?p=streams&a=add"><i class="icon-plus-sign icon-white"></i> <strong>Add new stream</strong></a>
 			</div>
 		</div>
-		<table class="table">
+		<table id="streams-table" class="table">
 			<tr>
 				<th>Nickname</th>
 				<th>Server URL</th>
