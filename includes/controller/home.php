@@ -51,6 +51,7 @@
 				while($row = $streams->fetch_assoc()) {
 					if($row['active'] == 1) {
 						$s = new Stream($row['nickname'], $row['hostname'], $row['username'], $row['password'], $row['mountpoint']);
+						$s->checkStatus();
 						$sdata = $s->info();
 	?>					<dt><?php print '<h4>' . $sdata['nickname'] . ' <small>(' . $sdata['hostname'] . $sdata['mountpoint'] . ')</small></h4>'; ?></dt>
 						<dd><?php $sdata['live'] ? print "<h5 class=\"text-success\">Online, {$sdata['listeners']} currently listening</h5>"

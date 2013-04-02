@@ -24,9 +24,10 @@
 	if(php_sapi_name() != "cli") {
 		isset($_GET['a']) ? $act = $_GET['a'] : $act = NULL;
 		switch($act) {
-			case "streamstats":
+			case "streamstatus":
 				if(isset($_GET['id']) && is_numeric($_GET['id'])) {
 	                $stream = Stream::get($db, $_GET['id']);
+					$stream->checkStatus();
 					if(!is_null($stream)) {
 	    	            define("ONLINE_STATUS", 0x01);
 						define("LIVE_STATUS", 0x02);

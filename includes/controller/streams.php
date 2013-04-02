@@ -70,6 +70,7 @@
 			$result = $db->getTable("streams");
 			while($row = $result->fetch_assoc()) {
 				$stream = new Stream($row['nickname'], $row['hostname'], $row['username'], $row['password'], $row['mountpoint']);
+				$stream->checkStatus();
 				$streamdata = $stream->info();
 				
 				$output .= "<tr class=\"" . (!$streamdata['live'] ? "error" : "") . "\">

@@ -23,7 +23,6 @@
 			$this->username = $username;
 			$this->password = $password;
 			$this->mountpoint = $mountpoint;
-			$this->checkStatus();
 	 	}
 	 	
 	 	public function info() {
