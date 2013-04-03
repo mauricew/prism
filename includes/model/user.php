@@ -60,9 +60,10 @@
 			}
 			else if(isset($_COOKIE['prism_user']) && isset($_COOKIE['prism_pass'])) {
 				if($this->_db->query("SELECT username, password from users " .
-					"where username = '{$_COOKIE['prism_user']}' and password = '{$_COOKIE['prism_password']}'")->num_rows == 0) {
+					"where `username` = '{$_COOKIE['prism_user']}' and `password` = '{$_COOKIE['prism_pass']}'")->num_rows == 0) {
 					// Foiled again!.
 					$this->logout();
+					return false;
 				}
 				$this->_username = $_COOKIE['prism_user'];
 				$this->_password = $_COOKIE['prism_pass'];
@@ -85,7 +86,7 @@
 						//Success
 						if($remember == "Yes") {
 							setcookie("prism_user", $username, time() + 86400);
-							setcookie("prism_pass", $this->computeHash($password), time() + 86400);
+							setcookie("prism_pass", $this->computeHash($password, $user_array['salt']), time() + 86400);
 						}
 						session_start();
 						$_SESSION['logged_in'] = true;
