@@ -49,20 +49,26 @@
 		$page = $_GET['p'];
 
 	if($_SESSION['logged_in'] == true) {
-		printNav();
-		$contPath = "includes/controller/$page.php";
-		$viewPath = "includes/view/$page.php";
-		if(file_exists($contPath) && file_exists($viewPath)) {
-			require($contPath);
-			require($viewPath);
-			isset($_GET['a']) ? $act = $_GET['a'] : $act = NULL;
-			eval('new ' . ucfirst($page). '_Controller($db, $act);');
+		switch($page) {
+			case "logout":
+				if(isset($_SESSION['logged_in']))
+					$user->logout();
+				header("Location: ./");
+				break;
+			case NULL:
+				printNav();
+				include("includes/controller/home.php");
+				include("includes/view/home.php");
+				break;
+			default:
+				printNav();
+				require("includes/controller/$page.php");
+				require("includes/view/$page.php");
+				isset($_GET['a']) ? $act = $_GET['a'] : $act = NULL;
+				eval('new ' . ucfirst($page). '_Controller($db, $act);');
+				
 		}
-		else {
-			printNav();
-			include("includes/controller/home.php");
-			include("includes/view/home.php");
-		}
+		
 	}
 	
 	else {
