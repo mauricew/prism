@@ -60,7 +60,7 @@
 			} return $data;
 		}
 		
-		public static function toolbarControl($date) {
+		public static function pagerControl($date) { 
 			isset($_GET['v']) ? $period = $_GET['v'] : $period = null;
 			switch($period) {
 				case "w":
@@ -71,24 +71,26 @@
 					$startDate = date("Y-m-d", strtotime($date . " -1 day"));
 					$endDate = date("Y-m-d", strtotime($date . " +1 day"));
 					break;	
-			}		
-?>
-		<div id="logView" class="btn-group">
-			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">View<span class="caret"></span></a>
+			}
+		?>
+			<ul id="logpager" class="pager">
+				<li class="previous"><a href="./?p=logs<?php !isset($period) ?: print "&v=$period"; ?>&d=<?php print $startDate; ?>">Previous</a></li>
+				<li><div class="text-center" style="display:inline;">Displaying <?php isset($_GET['v']) && $_GET['v'] == "w" ? print "the week of " : ""; ?><strong><?php print date("M d Y", strtotime($date)); ?></strong></div>
+				<?php $canGoNext = (strtotime(date("Y-m-d")) > strtotime(date("Y-m-d", strtotime($date)))); ?>
+				<li class="next<?php $canGoNext ?: print " disabled"; ?>"><a href="<?php 
+				$canGoNext == TRUE 
+					? print "./?p=logs" . (isset($period) ? "&v=$period" : "") . "&d=$endDate"
+					: print "#"; ?>">Next</a></li>
+			</ul>
+<?php	}
+		
+		public static function toolbarControl($date) {
+					
+?>			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><strong>View by</strong> <span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				<li<?php if($period == "d" || is_null($period))  print " class=\"active\"" ?>><a href="./?p=logs&v=d&d=<?php print $date; ?>">Day</a></li>
 				<li<?php if($period == "w") print " class=\"active\"" ?>><a href="./?p=logs&v=w&d=<?php print $date; ?>">Week</a></li>
 			</ul>
-		</div>
-		<span>Viewing data for <?php isset($_GET['v']) && $_GET['v'] == "w" ? print "the week of " : ""; ?><strong><?php print date("M d Y", strtotime($date)); ?></strong></span>
-		<div id="logpager" class="pagination">
-			<ul>
-				<li><a href="./?p=logs<?php !isset($period) ?: print "&v=$period"; ?>&d=<?php print $startDate; ?>">Previous</a></li>
-				<?php if(strtotime(date("Y-m-d")) > strtotime(date("Y-m-d", strtotime($date)))) { ?>
-				<li><a href="./?p=logs<?php !isset($period) ?: print "&v=$period"; ?>&d=<?php print $endDate; ?>">Next</a></li>
-				<?php } ?>
-			</ul>
-		</div>
 <?php	}
 	}
 ?>
