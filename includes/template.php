@@ -17,6 +17,8 @@
 	<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap-responsive.min.css" />
 	<script type="text/javascript" src="assets/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/bootstrap-datepicker.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/datepicker.css" />
 	<link rel="stylesheet" type="text/css" href="assets/style.css" />
 	<script type="text/javascript" src="assets/func.js"></script>
 </head>
