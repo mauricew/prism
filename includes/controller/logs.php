@@ -85,7 +85,7 @@
 <?php	}
 		
 		public static function toolbarControl($date) {
-					
+			isset($_GET['v']) ? $period = $_GET['v'] : $period = null;
 ?>			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><strong>View by</strong> <span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				<li<?php if($period == "d" || is_null($period))  print " class=\"active\"" ?>><a href="./?p=logs&v=d&d=<?php print $date; ?>">Day</a></li>
