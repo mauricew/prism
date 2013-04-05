@@ -132,4 +132,12 @@ $(document).ready(function() {
 		var streamID = $(this).attr("id").split('-')[1];
 		streamStatus(streamID, streamInfo);
 	});
+	$("#logs-selectedDateBtn").datepicker({
+		onRender: function(date) {
+			return date.valueOf() > new Date() ? 'disabled' : '';
+		}
+	}).on('changeDate', function(e) {
+		var urlString = "./?p=logs&d=" + $(this).data('date');
+		window.location = urlString;
+	});;
 });

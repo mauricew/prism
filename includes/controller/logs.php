@@ -86,11 +86,17 @@
 		
 		public static function toolbarControl($date) {
 			isset($_GET['v']) ? $period = $_GET['v'] : $period = null;
-?>			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><strong>View by</strong> <span class="caret"></span></a>
-			<ul class="dropdown-menu">
-				<li<?php if($period == "d" || is_null($period))  print " class=\"active\"" ?>><a href="./?p=logs&v=d&d=<?php print $date; ?>">Day</a></li>
-				<li<?php if($period == "w") print " class=\"active\"" ?>><a href="./?p=logs&v=w&d=<?php print $date; ?>">Week</a></li>
-			</ul>
+?>			
+			<?php if($period == null || $period == "d") { ?>
+			<a id="logs-selectedDateBtn" class="btn btn-primary" data-date-format="yyyy-mm-dd" data-date="<?php is_null($date) ?: print $date; ?>"><strong>Show date</strong> <span class="caret"></span></a>
+			<?php } ?>
+			<div class="btn-group">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">View by <span class="caret"></span></a>
+				<ul class="dropdown-menu pull-right">
+					<li<?php if($period == "d" || is_null($period))  print " class=\"active\"" ?>><a href="./?p=logs&v=d&d=<?php print $date; ?>">Day</a></li>
+					<li<?php if($period == "w") print " class=\"active\"" ?>><a href="./?p=logs&v=w&d=<?php print $date; ?>">Week</a></li>
+				</ul>
+			</div>
 <?php	}
 	}
 ?>
