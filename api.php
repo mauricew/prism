@@ -76,6 +76,7 @@
 					if($row['active'] == 1) {
 						$id = $row['id'];
 						$stream = new Stream($row['nickname'], $row['hostname'], $row['username'], $row['password'], $row['mountpoint']);
+						$stream->checkStatus();
 						if($stream->live) {
 							$info = $stream->info();
 							$db->query("insert into logs(`stream_id`, `time`, `listeners`) values ($id, $curTime, {$info['listeners']})");
