@@ -89,8 +89,8 @@
 		<div id="header" class="row">
 			<h2 class="pull-left">Shows</h2>
 			<div class="btn-toolbar pull-right">
-				<a class="btn" role="button" href="#schedule-import" data-toggle="modal"><i class="icon-file"></i>Import CSV</a>
-				<a class="btn btn-inverse" href="./?p=schedule&a=add"><i class="icon-plus-sign icon-white"></i> <strong>Add new show</strong></a>
+				<a class="btn" role="button" href="#schedule-import" data-toggle="modal"><i class="icon-file"></i>Import</a>
+				<a class="btn btn-primary" href="./?p=schedule&a=add"><i class="icon-plus-sign icon-white"></i> <strong>Add show</strong></a>
 			</div>
 		</div>
 		</h2>

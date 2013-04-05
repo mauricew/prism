@@ -29,7 +29,7 @@
 		<div id="header" class="row">
 			<h2 class="pull-left">Streams</h2>
 			<div class="btn-toolbar pull-right">
-				<a class="btn btn-inverse" href="./?p=streams&a=add"><i class="icon-plus-sign icon-white"></i> <strong>Add new stream</strong></a>
+				<a class="btn btn-primary" href="./?p=streams&a=add"><i class="icon-plus-sign icon-white"></i> <strong>Add stream</strong></a>
 			</div>
 		</div>
 		<table id="streams-table" class="table">
