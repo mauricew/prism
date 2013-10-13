@@ -7,16 +7,17 @@
 				printAlert("success", "Logged out.");
 		}*/
 		if(isset($_SESSION['login_error']) && $_SESSION['login_error']) {
-			printAlert("error", "Login failed.");
+			printAlert("danger", "Login failed.");
 		} ?>
 		<h1>Login to Prism</h1>
-		<input type="text" name="user" placeholder="Username" required class="input-block-level" style="font-size:1.125em;" />
-		<br>
-		<input type="password" name="pass" placeholder="Password" required class="input-block-level" style="font-size:1.125em;"  />
-		<br>
-		<label class="checkbox" for="remember">Remember me
-			<input type="checkbox" name="remember" value="Yes" />
-		</label>
-		<button type="submit" class="btn btn-large btn-primary">Login</button>		
+		<input class="form-control" type="text" name="user" placeholder="Username" required class="input-block-level" style="font-size:1.125em;" />
+		<input class="form-control" type="password" name="pass" placeholder="Password" required class="input-block-level" style="font-size:1.125em;"  />
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" name="remember" value="Yes" />
+				Remember me
+			</label>
+		</div>
+		<button type="submit" class="btn btn-lg btn-primary">Login</button>		
 	</form>
 </div>

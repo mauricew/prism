@@ -12,17 +12,15 @@
 	
 	
 	function setupNavBar() { ?>
-	<div class="navbar navbar-fixed-top navbar-inverse hidden-tablet hidden-phone">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand">Prism</a>
-				<ul class="nav">
+	<div class="navbar navbar-fixed-top navbar-inverse hidden-xs hidden-sm">
+		<div class="container">
+			<a class="navbar-brand">Prism</a>
+			<ul class="nav navbar-nav">
 					<li class="<?php isset($_POST['step']) ?: print "active"; ?>"><a>Database Info</a></li>
 					<li class="<?php $_POST['step'] != 1 ?: print "active"; ?>"><a>Database Setup</a></li>
 					<li class="<?php $_POST['step'] != 2 ?: print "active"; ?>"><a>User info</a></li>
 					<li class="<?php $_POST['step'] != 3 ?: print "active"; ?>"><a>Done!</a></li>
-				</ul>
-			</div>
+			</ul>
 		</div>
 	</div>
 <?php }	
@@ -59,12 +57,12 @@
 						$config_success = false;
 						
 						if($fp === FALSE) {
-							echo("<span class=\"text-error\"> failed!</span></h5>");
+							echo("<span class=\"text-danger\"> failed!</span></h5>");
 						}
 						
 						else {
 							if(fwrite($fp, $config_str) === FALSE) {
-								echo("<span class=\"text-error\"> failed!</span></h5>");
+								echo("<span class=\"text-danger\"> failed!</span></h5>");
 							}
 							else {
 								echo("<span class=\"text-success\"> success!</span></h5>");
@@ -83,14 +81,14 @@
 						?>
 						<form name="step2" method="post">
 						<input type="hidden" name="step" value="2" />
-						<button type="submit" name="submit" class="btn btn-large btn-primary">Proceed</button>
+						<button type="submit" name="submit" class="btn btn-lg btn-primary">Proceed</button>
 						</form>
 <?php 				}
 					else {
 						echo("<span class=\"text-error\">failed!</span>	</h5>");
 						printAlert("warn", "<strong>Warning</strong>: Database \"" . $_POST['db_name'] . "\" already exists. " .
 						"Either delete it or go back and try a different database name that is currently not in use.");
-						echo("<button onclick=\"javascript:history.back(1)\" class=\"btn btn-large\">Go Back</button>");
+						echo("<button onclick=\"javascript:history.back(1)\" class=\"btn btn-lg\">Go Back</button>");
 						printFooter();
 						exit();
 					}
@@ -98,7 +96,7 @@
 				else {
 					echo("  <span class=\"text-error\">failed!</span></h5>");
 					printAlert("error", "<strong>Error<x/strong>: " . (string)$db->conn->connect_error);
-					echo("<button onclick=\"javascript:history.back(1)\" class=\"btn btn-large\">Go Back</button>");
+					echo("<button onclick=\"javascript:history.back(1)\" class=\"btn btn-lg\">Go Back</button>");
 					printFooter();
 					exit();
 				}
@@ -108,7 +106,7 @@
 				if(!file_exists("config.php")) {
 					echo("<h3>Hold it right there mister</h3>");
 					echo("<p>You forgot to do something. Click back and try to find out what it is.</p>");
-					echo("<a href=\"javascript:history.back(1)\" class=\"btn btn-large\">Go Back</a>");
+					echo("<a href=\"javascript:history.back(1)\" class=\"btn btn-default btn-lg\">Go Back</a>");
 				
 				}
 				else {
@@ -122,19 +120,21 @@
 				<p>This first user will have unrestricted access to Prism and be able to manage other users.</p>
 				
 				<form method="post" name="step2">
-				
-				<label for="root_user">Username</label>
-				<input type="text" id="root_user" name="root_user" />
-				
-				<label for="root_pass">Password</label>
-				<input type="password" id=\"root_pass" name="root_pass" />
-
-				<label for="root_email">Email</label>
-				<input type="email" id="root_email" name="root_email" />
-				
+				<div class="form-group">
+					<label for="root_user">Username</label>
+					<input type="text" class="form-control" id="root_user" name="root_user" />
+				</div>
+				<div class="form-group">
+					<label for="root_pass">Password</label>
+					<input type="password" class="form-control" id="root_pass" name="root_pass" />
+				</div>
+				<div class="form-group">
+					<label for="root_email">Email</label>
+					<input type="email" class="form-control" id="root_email" name="root_email" />
+				</div>
 				<input type="hidden" name="step" value="3" />
 				
-				<br><button type="submit" name="submit" class="btn btn-large btn-primary">Proceed</button>
+				<br><button type="submit" name="submit" class="btn btn-lg btn-primary">Proceed</button>
 
 				</form>
 <?php			}
@@ -166,7 +166,7 @@
 					
 					<hr>
 					<p class="lead muted">Get ready.</p>
-					<a class="btn btn-large btn-success" href="./">Go</a>
+					<a class="btn btn-lg btn-success" href="./">Go</a>
 <?php			}
 				else {
 					
@@ -186,20 +186,28 @@
 			<h1>Prism Installation</h1>
 			<p>Thanks for choosing Prism, the web app that provides you with Pretty Robust Internet Streaming Management.</p>
 			<p>To install, all you need is some MySQL information. The database name you choose should not be in use.</p>
-			<p><span class="label">Protip</span> For the easiest install process, set the owner of the Prism directory to the web server user account (typically <em>www-data</em> or <em>nginx</em>).</p>
+			<p><span class="label label-default">Protip</span> For the easiest install process, set the owner of the Prism directory to the web server user account (typically <em>www-data</em> or <em>nginx</em>).</p>
 			
 			<form name="step1" method="post">
-				<label for="db_host">Host</label>
-					<input type="text" id="db_host" name="db_host" value="localhost" />
-				<label for="db_user">Username</label>
-					<input type="text" id="db_user" name="db_user" />
-				<label for="db_pass">Password</label>
-					<input type="password" id="db_pass" name="db_pass" />
-				<label for="db_name">Database Name</label>
-					<input type="text" id="db_name" name="db_name" />
+				<div class="form-group">
+					<label for="db_host">Host</label>
+					<input type="text" class="form-control" id="db_host" name="db_host" value="localhost" />
+				</div>
+				<div class="form-group">
+					<label for="db_user">Username</label>
+					<input type="text" class="form-control" id="db_user" name="db_user" />
+				</div>
+				<div class="form-group">	
+					<label for="db_pass">Password</label>
+					<input type="password" class="form-control" id="db_pass" name="db_pass" />
+				</div>
+				<div class="form-group">
+					<label for="db_name">Database Name</label>
+					<input type="text" class="form-control" id="db_name" name="db_name" />
+				</div>
 				<input type="hidden" name="step" value="1" />
 				<br>				
-				<button type="submit" name="submit" class="btn btn-large btn-primary">Proceed</button>
+				<button type="submit" name="submit" class="btn btn-lg btn-primary">Proceed</button>
 			</form>
 <?php	}
 	}

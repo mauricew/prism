@@ -88,10 +88,10 @@
 			isset($_GET['v']) ? $period = $_GET['v'] : $period = null;
 ?>			
 			<?php if($period == null || $period == "d") { ?>
-			<a id="logs-selectedDateBtn" class="btn btn-primary" data-date-format="yyyy-mm-dd" data-date="<?php is_null($date) ?: print $date; ?>"><strong>Show date</strong> <span class="caret"></span></a>
 			<?php } ?>
-			<div class="btn-group">
-				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">View by <span class="caret"></span></a>
+			<div class="btn-toolbar">
+			<a id="logs-selectedDateBtn" class="btn btn-primary" data-date-format="yyyy-mm-dd" data-date="<?php is_null($date) ?: print $date; ?>"><strong>Show date</strong> <span class="caret"></span></a>
+				<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">View by <span class="caret"></span></a>
 				<ul class="dropdown-menu pull-right">
 					<li<?php if($period == "d" || is_null($period))  print " class=\"active\"" ?>><a href="./?p=logs&v=d&d=<?php print $date; ?>">Day</a></li>
 					<li<?php if($period == "w") print " class=\"active\"" ?>><a href="./?p=logs&v=w&d=<?php print $date; ?>">Week</a></li>

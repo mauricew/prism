@@ -23,6 +23,13 @@
 							$db->escape($_POST['description']),
 							$timeslot
 						);
+						foreach($timeslot as $t) {
+								if(strtotime($t['start_time']) > strtotime($t['end_time'])) {
+									printAlert("danger", "<strong>Error adding show</strong><p>Start time exceeds end time.</p><p>Please wait while you're redirected back to the main schedule page.</p>");
+									header("Refresh: 3;url=./?p=schedule");
+									exit();
+								}
+							}
 						$show->add($db);
 						printAlert("success", "<strong>Show added successfully</strong><p>Please wait while you're redirected back to the main schedule page.</p>");
 						header("Refresh: 3;url=./?p=schedule");
@@ -57,6 +64,13 @@
 								$db->escape($_POST['description']),
 								$timeslot
 							);
+							foreach($timeslot as $t) {
+								if(strtotime($t['start_time']) > strtotime($t['end_time'])) {
+									printAlert("danger", "<strong>Error adding show</strong><p>Start time exceeds end time.</p><p>Please wait while you're redirected back to the main schedule page.</p>");
+									header("Refresh: 3;url=./?p=schedule");
+									exit();
+								}
+							}
 							$show->update($db, $_GET['id']);
 							header("Location: ./?p=schedule");
 						}
@@ -189,7 +203,7 @@
 					else
 						$output .= "<td>{$showdata['timeslots'][0]['day']} " . date("g:ia", strtotime($showdata['timeslots'][0]['start_time'])) . " - " . date("g:ia", strtotime($showdata['timeslots'][0]['end_time'])) . "</td>";
 					$output .= "<td><div class=\"btn-group\">
-						<button class=\"btn dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-cog\"></i><span class=\"caret\"></span></button>
+						<button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\"><span class=\"glyphicon glyphicon-cog\"></span><span class=\"caret\"></span></button>
 						<ul class=\"dropdown-menu\">
 							<li><a href=\"./?p=schedule&a=upd&id={$row['id']}\">Edit</a></li>
 							<li><a href=\"./?p=schedule&a=del&id={$row['id']}\">Delete</a></li>

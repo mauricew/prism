@@ -77,7 +77,7 @@
 					<td><a href=\"http://{$streamdata['hostname']}\">{$streamdata['hostname']}</a>{$streamdata['mountpoint']}</td>
 					<td class=\"status\">Loading...</td>
 					<td><div class=\"btn-group\">
-					<button class=\"btn dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-cog\"></i><span class=\"caret\"></span></button>
+					<button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\"><span class=\"glyphicon glyphicon-cog\"></span><span class=\"caret\"></span></button>
 					<ul class=\"dropdown-menu\">
 						<li><a href=\"./?p=streams&a=upd&id={$row['id']}\">Edit</a></li>
 						<li><a href=\"./?p=streams&a=del&id={$row['id']}\">Delete</a></li>

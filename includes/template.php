@@ -14,7 +14,6 @@
 	<meta charset="utf8">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap-responsive.min.css" />
 	<script type="text/javascript" src="assets/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="assets/bootstrap-datepicker.js"></script>
@@ -23,41 +22,42 @@
 	<script type="text/javascript" src="assets/func.js"></script>
 </head>
 <body>
-	<div class="container">
 <?php 	}
 	function printNav() {
 	?>
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-				</a>
-				<a class="brand" href="./">Prism</a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li<?php print checkPageTitle("streams"); ?>><a href="./?p=streams">Streams</a></li>
-						<li<?php print checkPageTitle("schedule"); ?>><a href="./?p=schedule">Schedule</a></li>
-						<li<?php print checkPageTitle("logs"); ?>><a href="./?p=logs">Logs</a></li>
-						<li><?php print checkPageTitle("settings"); ?><a href="#">Settings</a></li>
-					</ul>
-					<ul class="nav pull-right">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<strong><?php print $_SESSION['username'] ?></strong>
-								<b class="caret"></b></a>
-							<ul class="dropdown-menu" style="padding:10px;">
-								<h5>You are currently logged in.</h5>
-								<a class="btn btn-danger" href="./?p=logout">Log out</a>
-							</ul>
-						</li>
-					</ul>
-				</div>
+				</button>
+				<a class="navbar-brand" href="./">Prism</a>
+			</div>
+			<div class="nav-collapse navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li<?php print checkPageTitle("streams"); ?>><a href="./?p=streams">Streams</a></li>
+					<li<?php print checkPageTitle("schedule"); ?>><a href="./?p=schedule">Schedule</a></li>
+					<li<?php print checkPageTitle("logs"); ?>><a href="./?p=logs">Logs</a></li>
+					<li><?php print checkPageTitle("settings"); ?><a href="#">Settings</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<strong><?php print $_SESSION['username'] ?></strong>
+							<span class="caret"></span>
+						</a>
+						<div class="dropdown-menu" style="padding:10px;">
+							<h5>You are currently logged in.</h5>
+							<a class="btn btn-danger" href="./?p=logout">Log out</a>
+						</div>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
+	<div class="container">
 <?php 	} 
 	
 	function printFooter() { ?>
@@ -67,7 +67,7 @@
 <?php	}
 	
 	function printAlert($type, $message) {
-		echo("<div class=\"alert" . (!empty($type) ? " alert-$type" : "") . "\">");
+		echo("<div class=\"alert " . (!empty($type) ? " alert-$type" : "alert-warning") . "\">");
 		echo $message;
 		echo("</div>");
 	}

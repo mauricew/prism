@@ -84,6 +84,10 @@ $(document).ready(function() {
 		"starts in " + relativeTime($("#home .relative-next").text().match(/\d{1,2}:\d{2}( ?)[ap]m/g).toString())
 	)}, 60000);
 */
+	$(".navbar div.dropdown-menu").on("click", function(e) {
+		e.stopPropagation();
+	});
+	$(".btn-group input[type=radio]:checked").parent().addClass("active");
 	$(".relative").each(function () {
 		$(this).text(relativeTime(
 			$(this).text().match(/\d{1,2}:\d{2}( ?)[ap]m/g).toString()
@@ -93,16 +97,10 @@ $(document).ready(function() {
 		else if($(this).attr('id').indexOf("next") !== -1)
 			$(this).prepend("in ");
 	});
-	$("#day-of-week button").on("click", function(e) {
-		$('input[name=day-of-week]').val(e.target.value);
-	});
 	$("input[name$='minute']").on('change', function(e) {
-		if(e.target.value < 10) {
+		if(e.target.value < 10 && e.target.value.toString().length <= 1) {
 			e.target.value = "0" + e.target.value;
 		}
-	});
-	$("div[id$='-ampm'] a").on('click', function(e) {
-		$('input[name=' + $(this).parent().attr('id') + ']').val($(this).text());
 	});
 	$("#show-form button[name=submit]").on('click', function(e) {
 		$("input[type=hidden]").each(function() {

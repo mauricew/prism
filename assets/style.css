@@ -4,12 +4,8 @@
  * Created by Maurice Wahba, (c)2013
  */
 
-[class^="icon-"] {
-	/*background-image: url('bootstrap/glyphicons-halflings.png');*/
-}
-
 body {
-	padding-top: 50px;
+	padding-top: 60px;
 }
 
 #header {
@@ -26,16 +22,17 @@ body {
 	line-height: 40px;
 }
 
-#show-timeslots .timeslot .btn-group {
-	top: -5px;
+#show-timeslots input[type=text], #show-timeslots input[type=number], #show-timeslots select {
+	width: auto;
+	display: inline;
 }
 
 #logpager {
 	margin:0;
 }
 
-@media screen and (max-width: 979px) {
-	body {
-		padding-top: 0px;
-	}
+.form-actions {
+	background: #EEE;
+	margin: 20px 0;
+	padding: 10px;
 }
